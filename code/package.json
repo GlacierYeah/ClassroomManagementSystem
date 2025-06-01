@@ -1,0 +1,14 @@
+{
+  "name": "classroom-management-system",
+  "version": "1.0.0",
+  "description": "A simple classroom management system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mssql": "^10.0.2",
+    "mysql": "^2.18.1"
+  }
+}

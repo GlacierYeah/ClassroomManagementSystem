@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <link href="//unpkg.com/layui@2.9.8/dist/css/layui.css" rel="stylesheet">
+    <link href="//cdn.staticfile.org/layui/2.9.7/css/layui.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').submit(function(event) {
+                event.preventDefault(); // 阻止表单默认提交行为
+    
+                var accountId = $('#accountId').val();
+                var password = $('#password').val();
+    
+                // 尝试作为教师登录
+                $.ajax({
+                    url: '/loginTeacher', // 教师登录验证API的URL
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ teacherId: accountId, password: password }),
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.href = 'teacher-dashboard.html'; // 跳转到教师控制面板
+                        } else {
+                            // 如果作为教师登录失败，尝试作为学生登录
+                            $.ajax({
+                                url: '/loginStudent', // 学生登录验证API的URL
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify({ studentId: accountId, password: password }),
+                                success: function(response) {
+                                    if (response.success) {
+                                        window.location.href = 'student-dashboard.html'; // 跳转到学生控制面板
+                                    } else {
+                                        alert('账号或密码错误！');
+                                    }
+                                },
+                                error: function() {
+                                    alert('登录请求失败！');
+                                }
+                            });
+                        }
+                    },
+                    error: function() {
+                        alert('登录请求失败！');
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <style>
+        #sidebar {
+            float: left;
+            width: 200px;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        #mainContent {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .demo-login-container{width: 320px; margin: 50px 650px;}
+        .demo-login-other .layui-icon{position: relative; display: inline-block; margin: 0 2px; top: 2px; font-size: 26px;}
+
+        .bg {
+            background-image: url("ysuclasswinter.jpg"); /* 替换 'your-image-path.jpg' 为你的图片路径 */
+            background-size: cover; /* 背景图片覆盖整个元素 */
+            background-repeat: no-repeat; /* 防止背景图片重复 */
+            background-position: center center; /* 背景图片居中显示 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+        }
+    </style>
+    
+</head>
+<body class="bg">
+    <ul class="layui-nav">
+    <div>
+        <li class="layui-nav-item layui-this"><a>登录</li>
+    </div>
+    </ul>
+    <div style="text-align: center; font-size: 40px;margin-top: 20px; margin-left: -70px;">
+        <h1>教室管理系统</h1>
+    </div>  
+    <div>     
+        <form class="layui-form" id="loginForm">
+            <div class="demo-login-container"> 
+            <div class="layui-form-item">
+                <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-username"></i>
+                </div>
+                <input type="text" id="accountId" name="accountId" required value="" lay-verify="required" placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-password"></i>
+                </div>
+                <input type="password" id="password" name="password" required value="" lay-verify="required" placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">登录</button>
+            </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- 请勿在项目正式环境中引用该 layui.js 地址 -->
+    <script src="//unpkg.com/layui@2.9.8/dist/layui.js"></script>
+    
+</body>
+
+    
+</html>
