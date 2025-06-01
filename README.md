@@ -114,7 +114,7 @@ bash
 
 
 ```bash
-git clone https://github.com/your-repo/ClassroomManagementSystem.git
+git clone https://github.com/GlacierYeah/ClassroomManagementSystem.git
 cd ClassroomManagementSystem/code
 ```
 
