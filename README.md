@@ -1,9 +1,8 @@
 # ClassroomManagementSystem
-教室管理系统/数据库三级项目
-
+教室管理系统
 ## 项目简介
 
-ClassroomManagementSystem 是一个用于教室管理的系统，属于数据库三级项目。该系统为学校、培训机构等提供了全面的教室资源管理解决方案，具备用户登录验证、课程管理、开课表管理、教室管理以及教室借用管理等功能，使用 Node.js 和 Express 框架构建，结合 MSSQL 和 MySQL 数据库进行数据存储与管理。
+ClassroomManagementSystem 是一个用于教室管理的系统。该系统具备用户登录验证、课程管理、开课表管理、教室管理以及教室借用管理等功能，使用 Node.js 和 Express 框架构建，使用 MSSQL 数据库进行数据存储与管理。
 
 ## 项目功能
 
